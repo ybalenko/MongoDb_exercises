@@ -7,14 +7,14 @@ router.post("/", async (req, res, next) => {
   if (!widget || JSON.stringify(widget) === '{}' ) {
     res.status(400).send('widget is required');
   } else {
-    //save widget here
+    //TODO: save widget here
   }
 });
 
 // Read - single widget
 router.get("/:id", async (req, res, next) => {
   const widgetId = req.params.id;
-  const widget = null; // get widget here;
+  const widget = null; //TODO: get widget here;
   if (widget) {
     res.json(widget);
   } else {
@@ -29,14 +29,14 @@ router.put("/:id", async (req, res, next) => {
   if (!widget || JSON.stringify(widget) === '{}' ) {
     res.status(400).send('widget is required"');
   } else {
-    //update widget here
+    //TODO: update widget here
   }
 });
 
 // Delete
 router.delete("/:id", async (req, res, next) => {
   const widgetId = req.params.id;
-  // delete widget here
+  //TODO: delete widget here
 });
 
 module.exports = router;
