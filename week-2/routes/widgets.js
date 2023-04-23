@@ -1,42 +1,46 @@
-const { Router } = require("express");
+const { Router } = require('express');
 const router = Router();
+const WidgetDAO = require('../daos/widgets');
 
 // Create
 router.post("/", async (req, res, next) => {
-  const widget = req.body;
-  if (!widget || JSON.stringify(widget) === '{}' ) {
-    res.status(400).send('widget is required');
-  } else {
-    //TODO: save widget here
-  }
+    const widget = req.body;
+    console.log('Widget post', widget)
+    if (!widget || JSON.stringify(widget) === '{}') {
+        res.status(400).send('widget is required');
+    } else {
+        const savedWidget = await WidgetDAO.create(widget);
+        res.json(savedWidget);
+    }
 });
 
 // Read - single widget
 router.get("/:id", async (req, res, next) => {
-  const widgetId = req.params.id;
-  const widget = null; //TODO: get widget here;
-  if (widget) {
-    res.json(widget);
-  } else {
-    res.sendStatus(404);
-  }
+    const widgetId = req.params.id;
+    const widget = await WidgetDAO.getById(widgetId);
+    if (widget) {
+        res.json(widget);
+    } else {
+        res.sendStatus(404);
+    }
 });
 
 // Update
 router.put("/:id", async (req, res, next) => {
-  const widgetId = req.params.id;
-  const widget = req.body;
-  if (!widget || JSON.stringify(widget) === '{}' ) {
-    res.status(400).send('widget is required"');
-  } else {
-    //TODO: update widget here
-  }
+    const widgetId = req.params.id;
+    const widget = req.body;
+    if (!widget || JSON.stringify(widget) === '{}') {
+        res.status(400).send('widget is required');
+    } else {
+        const updatedWidget = await WidgetDAO.updateById(widgetId, widget);
+        res.json(updatedWidget);
+    }
 });
 
 // Delete
 router.delete("/:id", async (req, res, next) => {
-  const widgetId = req.params.id;
-  //TODO: delete widget here
+    const widgetId = req.params.id;
+    await WidgetDAO.deleteById(widgetId);
 });
 
 module.exports = router;

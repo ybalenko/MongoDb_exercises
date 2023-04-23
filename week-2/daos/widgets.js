@@ -1,15 +1,22 @@
 const Widgets = require('../models/widgets');
 
 module.exports = {};
-  
+
 module.exports.create = async (widget) => {
-  //TODO: create widget document in the DB
+    //create widget document in the DB
+    return await Widgets.create(widget);
+
 };
 
 module.exports.getById = async (id) => {
-  //TODO: look up widget in the DB and return it
+    //look up widget in the DB and return it
+    return await Widgets.findOne({ _id: id }).lean();
 };
 
-//TODO: add method to update widget
+module.exports.updateById = async (id, widget) => {
+    await Widgets.updateOne({ _id: id }, widget).lean();
+}
 
-//TODO: add method to remove widget
+module.exports.deleteById = async (id) => {
+    await Widgets.deleteOne({ _id: id });
+}
