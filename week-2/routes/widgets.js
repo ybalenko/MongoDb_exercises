@@ -5,7 +5,6 @@ const WidgetDAO = require('../daos/widgets');
 // Create
 router.post("/", async (req, res, next) => {
     const widget = req.body;
-    console.log('Widget post', widget)
     if (!widget || JSON.stringify(widget) === '{}') {
         res.status(400).send('widget is required');
     } else {
@@ -41,6 +40,7 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
     const widgetId = req.params.id;
     await WidgetDAO.deleteById(widgetId);
+    res.sendStatus(200);
 });
 
 module.exports = router;
